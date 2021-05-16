@@ -2,7 +2,7 @@
 
 # asdf-tree-sitter ![Build](https://github.com/soto2080/asdf-tree-sitter/workflows/Build/badge.svg) ![Lint](https://github.com/soto2080/asdf-tree-sitter/workflows/Lint/badge.svg)
 
-[tree-sitter](https://github.com/soto2080/tree-sitter) plugin for the [asdf version manager](https://asdf-vm.com).
+[tree-sitter](https://github.com/tree-sitter/tree-sitter) plugin for the [asdf version manager](https://asdf-vm.com).
 
 </div>
 
@@ -16,7 +16,7 @@
 
 # Dependencies
 
-- `bash`, `curl`, `tar`: generic POSIX utilities.
+- `bash`, `curl`, `gunzip`: generic POSIX utilities.
 - `SOME_ENV_VAR`: set this environment variable in your shell config to load the correct version of tool x.
 
 # Install

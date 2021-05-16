@@ -2,8 +2,7 @@
 
 set -euo pipefail
 
-# TODO: Ensure this is the correct GitHub homepage where releases can be downloaded for tree-sitter.
-GH_REPO="https://github.com/soto2080/tree-sitter"
+GH_REPO="https://github.com/tree-sitter/tree-sitter"
 TOOL_NAME="tree-sitter"
 TOOL_TEST="tree-sitter -h"
 
@@ -31,8 +30,6 @@ list_github_tags() {
 }
 
 list_all_versions() {
-  # TODO: Adapt this. By default we simply list the tag names from GitHub releases.
-  # Change this function if tree-sitter has other means of determining installable versions.
   list_github_tags
 }
 
@@ -41,9 +38,7 @@ download_release() {
   version="$1"
   filename="$2"
 
-  # TODO: Adapt the release URL convention for tree-sitter
-  url="$GH_REPO/archive/v${version}.tar.gz"
-
+  url="$GH_REPO/releases/download/v${version}/tree-sitter-linux-x64.gz"
   echo "* Downloading $TOOL_NAME release $version..."
   curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
 }
@@ -58,12 +53,12 @@ install_version() {
   fi
 
   (
-    mkdir -p "$install_path"
-    cp -r "$ASDF_DOWNLOAD_PATH"/* "$install_path"
+    mkdir -p "$install_path"/bin
+    cp "$ASDF_DOWNLOAD_PATH"/tree-sitter-* "$install_path"/bin/tree-sitter
 
-    # TODO: Asert tree-sitter executable exists.
     local tool_cmd
     tool_cmd="$(echo "$TOOL_TEST" | cut -d' ' -f1)"
+    chmod +x "$install_path/bin/$tool_cmd"
     test -x "$install_path/bin/$tool_cmd" || fail "Expected $install_path/bin/$tool_cmd to be executable."
 
     echo "$TOOL_NAME $version installation was successful!"
